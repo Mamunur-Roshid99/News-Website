@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Card';
 
 const Newsapp = () => {
@@ -17,40 +17,67 @@ const Newsapp = () => {
         setNewsData(jsonData.articles)
     }
 
+    useEffect(()=>{
+      getData()
+    },[])
+
     const handleInput = (e) => {
         console.log(e.target.value);
         setSearch(e.target.value)
     }
 
+    const userInput = (event) => {
+        setSearch(event.target.value)
+    }
+
   return (
     <div>
-        {/* navbar */}
+      {/* navbar */}
       <nav>
         <div>
           <h1>Trending News</h1>
         </div>
         <ul>
-          <a href="#">All News</a>
-          <a href="#">Trending</a>
+          <button className='cursor-pointer' onClick={userInput} value="all news">
+            All News
+          </button>
+          <button className='cursor-pointer' onClick={userInput} value="trending">
+            Trending
+          </button>
         </ul>
         <div className="searchBar">
-          <input type="text" placeholder="Search news" onChange={handleInput} />
-          <button onClick={getData}>Search</button>
+          <input
+            type="text"
+            placeholder="Search news"
+            value={search}
+            onChange={handleInput}
+          />
+          <button className='button' onClick={getData}>Search</button>
         </div>
       </nav>
       {/*  */}
       <div>
-        <p className='head'>Stay update with Trending news</p>
+        <p className="head">Stay update with Trending news</p>
       </div>
-        {/* category */}
+      {/* category */}
       <div className="categoryBtn">
-        <button>Sports</button>
-        <button>Politics</button>
-        <button>Entertainment</button>
-        <button>Health</button>
-        <button>Fitness</button>
+        <button onClick={userInput} value="sports">
+          Sports
+        </button>
+        <button onClick={userInput} value="politics">
+          Politics
+        </button>
+        <button onClick={userInput} value="entertainment">
+          Entertainment
+        </button>
+        <button onClick={userInput} value="health">
+          Health
+        </button>
+        <button onClick={userInput} value="fitness">
+          Fitness
+        </button>
       </div>
-        {/* card */}
+      {/* card */}
       <div>
         <Card data={newsData} />
       </div>

@@ -9,9 +9,11 @@ const Card = ({data}) => {
               <div key={article.id} className="card">
                 <img src={article.urlToImage} alt="" />
                 <div className="cardContent">
-                  <a className='title'>{article.title}</a>
+                  <a href={article.url} target="_blank" className="title">
+                    {article.title}
+                  </a>
                   <p>{article.description}</p>
-                  <a className='link' href={article.url} target="_blank">
+                  <a className="link" href={article.url} target="_blank">
                     Read More
                   </a>
                 </div>
